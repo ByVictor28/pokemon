@@ -8,13 +8,23 @@ export default function Home({listPokemons}) {
   return (
     <Layout>
       <main>
-        <Card pokemon={listPokemons[0]}/>
+        {
+          listPokemons.map(pokemon => <Card pokemon={pokemon}/>)
+        }
       </main>
+      <style>{`
+        main{
+          display:flex;
+          flex-wrap:wrap;
+          gap:2rem;
+          justify-content:center;
+        }
+      `}</style>
     </Layout>
   )
 }
 export async function getServerSideProps(context) {
-  const listPokemons =await fetch("https://pokeapi.co/api/v2/pokemon/?limit=1&offset=1")
+  const listPokemons =await fetch("https://pokeapi.co/api/v2/pokemon/?limit=5&offset=5")
   const listPokemonsJSON =await listPokemons.json()
   const results = listPokemonsJSON.results
 

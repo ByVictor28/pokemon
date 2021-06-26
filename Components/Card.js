@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Card({pokemon}) { 
     return (
         <div className="container">
+            <div className="circle"></div>
             <div className="card">
                 <div className="image">
                     <img className="image_front" src={pokemon.sprites.front_default} alt="pokemon front" />
@@ -16,7 +17,7 @@ export default function Card({pokemon}) {
                         <h4>types</h4>
                         <div className="list">
                             {
-                                pokemon.types.map(type => <div className="block">{type.type.name}</div>)
+                                pokemon.types.map((type,i) => <div key={i+type.type.name} className="block">{type.type.name}</div>)
                             }
                         </div>
 
@@ -25,7 +26,7 @@ export default function Card({pokemon}) {
                         <h4>stats</h4>
                         <div className="list">
                             {
-                                pokemon.stats.map(stat => {
+                                pokemon.stats.map((stat,i) => {
                                     let icon;
                                     switch (stat.stat.name) {
                                         case "hp":
@@ -47,7 +48,7 @@ export default function Card({pokemon}) {
                                             icon = <FontAwesomeIcon icon={faRunning}/>
                                             break;
                                     }
-                                    return <div className="block"><span>{icon}{stat.base_stat}</span></div>
+                                    return <div key={i+stat.stat.name} className="block"><span>{icon}{stat.base_stat}</span></div>
                                 })
                             }
                         </div>
@@ -55,15 +56,37 @@ export default function Card({pokemon}) {
                 </div>
             </div>
             <style jsx>{`
+            
+                h3,h4{
+                    margin:0;
+                }
                 .container{
                     background:var(--BackgroundCar_dark);
                     width:25rem;
-                    height:35rem;
+                    height:40rem;
                     border-radius:1rem;
                     text-align:center;
+                    padding:1rem 0;
+                    position:relative;
+                    overflow:hidden;
+
                 }
-                h3,h4{
-                    margin:0;
+                .container .circle{
+                    content:"";
+                    display:block;
+                    width:50rem;
+                    height:50rem;
+                    top:-34rem;
+                    right:-15rem;
+                    border-radius:50%;
+                    background:var(--Bright_Red);
+                    position:absolute;
+                    z-index:0;
+                    transition:all 1s ease;
+                }
+                .container .card{
+                    position: relative;
+                    z-index:5;
                 }
                 .container .card .image{
                     padding:0 1rem; 
@@ -74,57 +97,51 @@ export default function Card({pokemon}) {
                     justify-content:center;
                     align-items:center;
                     margin-bottom:2rem;
+                    // background:blue;
                 }
                 .container .card .image .image_center{
                     width:100%;
                     margin:0 auto;
+                    // z-index:99;
                 }
                 .container .card .image .image_front{
                     visibility:hidden;
                     opacity: 0;
                     transition: visibility 0s, opacity 0.5s linear 0.5s;
                     height:9rem;
+                    // z-index:99;
                 }
                 .container .card .image .image_back{
                     visibility:hidden;
                     opacity: 0;
                     transition: visibility 0s, opacity 0.5s linear 0.5s;
                     height:9rem;
+                    // z-index:99;
                 }
+                
                 .container .card .content .list{
                     display:flex;
                     gap:0.5rem;
-                    padding:1rem;
+                    padding:0.5rem 1.5rem;
                     flex-wrap:wrap;
                 }
                 .container .card .content .list .block{
-                    
+                    background:var(--Lime_Green);
                     padding:0.5rem 1rem;
                     border-radius:2rem
-                }
-
-                .container .card .content .stats .list .block {
-                    display:relative;
-                }
-                .container .card .content .stats .list strong {
-                    display:absolute;
                 }
                 
                 .container .card .content .types{
                     transition: visibility 0s, opacity 0.5s linear;
-                    margin:2rem 0;
+                    margin-top:2rem;
                     visibility:hidden;
                     opacity: 0;
-                    
                 }
                 .container .card .content .stats{
                     visibility:hidden;
                     opacity: 0;
                     transition: visibility 0s, opacity 0.5s linear 0.5s;
                 }
-
-
-
 
                 //TRANSITIONS
                 .container:hover > .card .image{
@@ -145,6 +162,13 @@ export default function Card({pokemon}) {
                 .container:hover > .card .image .image_front{
                     visibility:visible;
                     opacity: 1;
+                }
+                .container:hover > .circle {
+                    width:30rem;
+                    height:30rem;
+                    top:-13rem;
+                    right:-10rem;
+                    border-radius:50%;
                 }
             `}</style>
         </div>

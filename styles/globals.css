@@ -10,6 +10,9 @@
   --BackgroundCar_white: hsl(227, 47%, 96%);
   --TextSub_white: hsl(228, 12%, 44%);
   --Text_white: hsl(230, 17%, 14%);
+
+  --Lime_Green: hsl(163, 72%, 41%);
+  --Bright_Red:hsl(356, 69%, 56%);
 }
 html {
   /* 1rem = 10px */
