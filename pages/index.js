@@ -9,7 +9,7 @@ export default function Home({listPokemons}) {
     <Layout>
       <main>
         {
-          listPokemons.map(pokemon => <Card pokemon={pokemon}/>)
+          listPokemons.map((pokemon,id) => <Card pokemon={pokemon} key={`${id}_${pokemon.name}`}/>)
         }
       </main>
       <style>{`
@@ -31,7 +31,6 @@ export async function getServerSideProps(context) {
   const listPokemonsDetails = await Promise.all(
     results.map( async pokemon => {
       const pokemonDetail = await fetch(pokemon.url)
-      console.log(pokemon.name , pokemon.url)
       const pokemonDetailJSON = await pokemonDetail.json()
       return pokemonDetailJSON
     })

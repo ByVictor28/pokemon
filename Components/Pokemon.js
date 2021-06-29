@@ -1,15 +1,16 @@
 import Card from "./Card"
 import Link from "next/link"
+import { countPokemon } from "../services/pokemon"
 
 export default function Pokemon({pokemon}) { 
     console.log(pokemon)
     return (
         <main>
             <div className="controls">
-                <div className="previus"><Link href="/"><a>Previus</a></Link></div>
-                <div className="next"><Link href="/"><a>Next</a></Link></div>
+                {pokemon.pokemon.id !== 1 && <div className="previus"><Link href={`/pokemon/${pokemon.pokemon.id - 1}`}><a>Previus</a></Link></div>}
+                {pokemon.pokemon.id !== countPokemon && <div className="next"><Link href={`/pokemon/${pokemon.pokemon.id + 1}`}><a>Next</a></Link></div>}
             </div>
-            <h2>{pokemon.pokemon.name}</h2>
+            <h2>#{pokemon.pokemon.id} {pokemon.pokemon.name}</h2>
             <div className="content">
                 <div className="pokemon">
                     <img src={pokemon.pokemon.sprites.other.dream_world.front_default} alt="pokemon random" />

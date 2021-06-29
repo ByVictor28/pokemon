@@ -1,60 +1,62 @@
 import { faHeart, faFistRaised, faShieldAlt, faRunning, faStar} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import Link from 'next/link';
 export default function Card({pokemon}) { 
     return (
         <div className="container">
-            <div className="circle"></div>
-            <div className="card">
-                <div className="image">
-                    <img className="image_front" src={pokemon.sprites.front_default} alt="pokemon front" />
-                    <img className="image_center" src={pokemon.sprites.other.dream_world.front_default} alt="pokemon main" />
-                    <img className="image_back" src={pokemon.sprites.back_default} alt="pokemon back" />
-                </div>
-                <div className="content">
-                    <h3>{pokemon.name}</h3>
-                    <div className="types">
-                        <h4>types</h4>
-                        <div className="list">
-                            {
-                                pokemon.types.map((type,i) => <div key={i+type.type.name} className="block">{type.type.name}</div>)
-                            }
-                        </div>
+        <div className="circle"></div>
+            <Link href={`/pokemon/${pokemon.id}`}>
+                <div className="card">
+                    <div className="image">
+                        <img className="image_front" src={pokemon.sprites.front_default} alt="pokemon front" />
+                        <img className="image_center" src={pokemon.sprites.other.dream_world.front_default} alt="pokemon main" />
+                        <img className="image_back" src={pokemon.sprites.back_default} alt="pokemon back" />
+                    </div>
+                    <div className="content">
+                        <h3>{pokemon.name}</h3>
+                        <div className="types">
+                            <h4>types</h4>
+                            <div className="list">
+                                {
+                                    pokemon.types.map((type,i) => <div key={i+type.type.name} className="block">{type.type.name}</div>)
+                                }
+                            </div>
 
-                    </div>
-                    <div className="stats">
-                        <h4>stats</h4>
-                        <div className="list">
-                            {
-                                pokemon.stats.map((stat,i) => {
-                                    let icon;
-                                    switch (stat.stat.name) {
-                                        case "hp":
-                                            icon = <FontAwesomeIcon icon={faHeart}/>
-                                            break;
-                                        case "attack":
-                                            icon = <FontAwesomeIcon icon={faFistRaised}/>
-                                            break;
-                                        case "defense":
-                                            icon = <FontAwesomeIcon icon={faShieldAlt}/>
-                                            break;
-                                        case "special-attack":
-                                            icon = <><FontAwesomeIcon icon={faStar}/> <FontAwesomeIcon icon={faFistRaised}/></>
-                                            break;
-                                        case "special-defense":
-                                            icon = <><FontAwesomeIcon icon={faStar}/> <FontAwesomeIcon icon={faShieldAlt}/></>
-                                            break;
-                                        default:
-                                            icon = <FontAwesomeIcon icon={faRunning}/>
-                                            break;
-                                    }
-                                    return <div key={i+stat.stat.name} className="block"><span>{icon}{stat.base_stat}</span></div>
-                                })
-                            }
+                        </div>
+                        <div className="stats">
+                            <h4>stats</h4>
+                            <div className="list">
+                                {
+                                    pokemon.stats.map((stat,i) => {
+                                        let icon;
+                                        switch (stat.stat.name) {
+                                            case "hp":
+                                                icon = <FontAwesomeIcon icon={faHeart}/>
+                                                break;
+                                            case "attack":
+                                                icon = <FontAwesomeIcon icon={faFistRaised}/>
+                                                break;
+                                            case "defense":
+                                                icon = <FontAwesomeIcon icon={faShieldAlt}/>
+                                                break;
+                                            case "special-attack":
+                                                icon = <><FontAwesomeIcon icon={faStar}/> <FontAwesomeIcon icon={faFistRaised}/></>
+                                                break;
+                                            case "special-defense":
+                                                icon = <><FontAwesomeIcon icon={faStar}/> <FontAwesomeIcon icon={faShieldAlt}/></>
+                                                break;
+                                            default:
+                                                icon = <FontAwesomeIcon icon={faRunning}/>
+                                                break;
+                                        }
+                                        return <div key={i+stat.stat.name} className="block"><span>{icon}{stat.base_stat}</span></div>
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Link>
             <style jsx>{`
             
                 h3,h4{
@@ -87,6 +89,7 @@ export default function Card({pokemon}) {
                 .container .card{
                     position: relative;
                     z-index:5;
+                    cursor:pointer;
                 }
                 .container .card .image{
                     padding:0 1rem; 
