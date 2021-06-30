@@ -1,16 +1,24 @@
 import { faHeart, faFistRaised, faShieldAlt, faRunning, faStar} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from 'next/link';
+import Image from "next/image"
 export default function Card({pokemon}) { 
     return (
         <div className="container">
-        <div className="circle"></div>
-            <Link href={`/pokemon/${pokemon.id}`}>
+            
+            <div className="circle"></div>
+                <Link href={`/pokemon/${pokemon.id}`}>
                 <div className="card">
                     <div className="image">
-                        <img className="image_front" src={pokemon.sprites.front_default} alt="pokemon front" />
-                        <img className="image_center" src={pokemon.sprites.other.dream_world.front_default} alt="pokemon main" />
-                        <img className="image_back" src={pokemon.sprites.back_default} alt="pokemon back" />
+                        <div className="image_front">
+                            <Image src={pokemon.sprites.front_default} alt="pokemon front" width={100} height={100} layout="responsive" />
+                        </div>
+                        <div className="image_center">
+                            <Image src={pokemon.sprites.other.dream_world.front_default} alt="pokemon main" width={100} height={100} layout="responsive" />
+                        </div>
+                        <div className="image_back">
+                            <Image src={pokemon.sprites.back_default} alt="pokemon back" width={100} height={100} layout="responsive" />
+                        </div>
                     </div>
                     <div className="content">
                         <h3>{pokemon.name}</h3>
@@ -68,7 +76,7 @@ export default function Card({pokemon}) {
                     height:40rem;
                     border-radius:1rem;
                     text-align:center;
-                    padding:1rem 0;
+                    padding:1rem;
                     position:relative;
                     overflow:hidden;
 
@@ -92,34 +100,31 @@ export default function Card({pokemon}) {
                     cursor:pointer;
                 }
                 .container .card .image{
-                    padding:0 1rem; 
+                    background:blue;
                     width:100%;
-                    margin:0 auto;
-                    transition:all 1s ease;
                     display:flex;
                     justify-content:center;
                     align-items:center;
-                    margin-bottom:2rem;
-                    // background:blue;
+                    margin-bottom:1rem;
+                }
+                .container .card .image div{
+                    background:red;
                 }
                 .container .card .image .image_center{
-                    width:100%;
-                    margin:0 auto;
-                    // z-index:99;
+                    width: 80%;
+                    transition: all 1s ease;
                 }
                 .container .card .image .image_front{
                     visibility:hidden;
                     opacity: 0;
-                    transition: visibility 0s, opacity 0.5s linear 0.5s;
-                    height:9rem;
-                    // z-index:99;
+                    transition: all 1s ease;
+                    width:0%;
                 }
                 .container .card .image .image_back{
                     visibility:hidden;
                     opacity: 0;
-                    transition: visibility 0s, opacity 0.5s linear 0.5s;
-                    height:9rem;
-                    // z-index:99;
+                    transition: all 1s ease;
+                    width:0%;
                 }
                 
                 .container .card .content .list{
@@ -135,7 +140,7 @@ export default function Card({pokemon}) {
                 }
                 
                 .container .card .content .types{
-                    transition: visibility 0s, opacity 0.5s linear;
+                    transition: all 1s ease;
                     margin-top:2rem;
                     visibility:hidden;
                     opacity: 0;
@@ -143,12 +148,12 @@ export default function Card({pokemon}) {
                 .container .card .content .stats{
                     visibility:hidden;
                     opacity: 0;
-                    transition: visibility 0s, opacity 0.5s linear 0.5s;
+                    transition: all 1s ease;
                 }
 
                 //TRANSITIONS
                 .container:hover > .card .image{
-                    width:45%;
+                    // width:60%;
                 }
                 .container:hover > .card .content .types{
                     visibility:visible;
@@ -158,13 +163,18 @@ export default function Card({pokemon}) {
                     visibility:visible;
                     opacity: 1;
                 }
+                .container:hover > .card .image .image_center{
+                    width: 50%;
+                }
                 .container:hover > .card .image .image_back{
                     visibility:visible;
                     opacity: 1;
+                    width:30%
                 }
                 .container:hover > .card .image .image_front{
                     visibility:visible;
                     opacity: 1;
+                    width:30%
                 }
                 .container:hover > .circle {
                     width:30rem;

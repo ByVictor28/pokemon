@@ -1,5 +1,6 @@
 import Card from "./Card"
 import Link from "next/link"
+import Image from "next/image"
 import { countPokemon } from "../services/pokemon"
 
 export default function Pokemon({pokemon}) { 
@@ -13,7 +14,7 @@ export default function Pokemon({pokemon}) {
             <h2>#{pokemon.pokemon.id} {pokemon.pokemon.name}</h2>
             <div className="content">
                 <div className="pokemon">
-                    <img src={pokemon.pokemon.sprites.other.dream_world.front_default} alt="pokemon random" />
+                    <Image src={pokemon.pokemon.sprites.other.dream_world.front_default} width={300} height={300} alt="pokemon random" />
                     <aside>
                         <p>{pokemon.specie.flavor_text_entries[1].flavor_text}</p>
                         <div className="caracteristics">
