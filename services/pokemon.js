@@ -1,5 +1,20 @@
 export const countPokemon = 376;
 
+export async function getPokemonList(page) {
+    const listPokemons =await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${20*page}`)
+    const listPokemonsJSON =await listPokemons.json()
+    const results = listPokemonsJSON.results
+
+    const listPokemonsDetails = await Promise.all(
+        results.map( async pokemon => {
+        const pokemonDetail = await fetch(pokemon.url)
+        const pokemonDetailJSON = await pokemonDetail.json()
+        return pokemonDetailJSON
+        })
+    )
+    return listPokemonsDetails
+}
+
 export async function getAllPokemonDetails(id) {
     let pokemonDetails = {}
     const random = Math.round(Math.random() * (898 - 1) + 1);
@@ -25,7 +40,7 @@ export async function getAllPokemonDetails(id) {
     
     evolutions.push(pokemonEvolutionsJSON.chain.species)
     evolutions.push(pokemonEvolutionsJSON.chain.evolves_to[0].species)
-    console.log(pokemonEvolutionsJSON.chain.evolves_to[0].evolves_to[0])
+    // console.log(pokemonEvolutionsJSON.chain.evolves_to[0].evolves_to[0])
     if (pokemonEvolutionsJSON.chain.evolves_to[0].evolves_to[0] !== undefined){
         evolutions.push(pokemonEvolutionsJSON.chain.evolves_to[0].evolves_to[0].species)
     }

@@ -21,7 +21,7 @@ export default function Card({pokemon}) {
                         </div>
                     </div>
                     <div className="content">
-                        <h3>{pokemon.name}</h3>
+                        <h3>{`#${pokemon.id} ${pokemon.name}`}</h3>
                         <div className="types">
                             <h4>types</h4>
                             <div className="list">
@@ -100,7 +100,7 @@ export default function Card({pokemon}) {
                     cursor:pointer;
                 }
                 .container .card .image{
-                    background:blue;
+                    // background:blue;
                     width:100%;
                     display:flex;
                     justify-content:center;
@@ -108,7 +108,7 @@ export default function Card({pokemon}) {
                     margin-bottom:1rem;
                 }
                 .container .card .image div{
-                    background:red;
+                    // background:red;
                 }
                 .container .card .image .image_center{
                     width: 80%;
