@@ -1,13 +1,35 @@
+import { useState } from "react";
 import Link from "next/link"
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faRandom,faSearch} from "@fortawesome/free-solid-svg-icons"
+import { useRouter } from 'next/router'
 export default function Header({children}) { 
+    const router = useRouter()
+    const [searchValue, setSearchValue] = useState("")
+
+    const searchHandler = () =>{
+        router.push(`/pokemon/${searchValue}`)
+    }
+    const enterHandler = (e) =>{
+        
+        if (e.key === "Enter") {
+            searchHandler()
+        }
+    }
     return (
         <nav className="navigation">
             <ul>
-                <li id="start"><Link href="/"><a>Home</a></Link></li>
-                <li id="middle"><Link href="/random"><a>Random</a></Link></li>
+                <li id="start"><Link href="/"><a>Pokemons</a></Link></li>
+                <div id="middle">    
+                    <FontAwesomeIcon icon={faRandom} />
+                    <li><Link href="/random"><a>Random</a></Link></li>
+                </div>
                 <div id="end">
-                    <li><Link href="/items"><a>Items</a></Link></li>
+                    <div className="search">
+                        <input type="text" placeholder="Name or id" id="search" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} onKeyPress={(e) => enterHandler(e)} />
+                        <button onClick={searchHandler}><FontAwesomeIcon icon={faSearch}/></button>
+                    </div>
+                    <li><Link href="/type"><a>types</a></Link></li>
                     <li><Link href="/berries"><a>Berries</a></Link></li>
                 </div>
             </ul>
@@ -21,6 +43,11 @@ export default function Header({children}) {
                     display:flex;
                     justify-content:space-between;
                 }
+                .navigation ul #middle{
+                    display:flex;
+                    align-items:center;
+                    gap:1rem;
+                }
                 .navigation ul li{
                     list-style:none;
                     padding:1rem 1rem 1rem 0;
@@ -30,6 +57,29 @@ export default function Header({children}) {
                 }
                 #end{
                     display:flex;
+                    align-items:center;
+                    gap:0.5rem;
+                }
+                .search{
+                    position:relative;
+                }
+                #search{
+                    border:none;
+                    height:3rem;
+                    background:var(--BackgroundCar_dark);
+                    color:var(--TextSub_dark);
+                }
+                .search button{
+                    background:var(--BackgroundCar_dark);
+                    // background:red;
+                    border:none;
+                    font-size:1.5rem;
+                    padding:0.5rem;
+                    position:absolute;
+                    top:0.1rem;
+                    right:0.2rem;
+                    cursor:pointer;
+                    color:var(--TextSub_dark);
                 }
                 
             `}</style>

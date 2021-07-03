@@ -12,7 +12,7 @@ export default function RandomPokemon({pokemon}) {
     ) 
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
     const random = Math.round(Math.random() * (376 - 1) + 1);
     // console.log(random)
     const pokemonDetails = await getAllPokemonDetails(random)
