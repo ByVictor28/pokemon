@@ -2,61 +2,67 @@ import Card from "./Card"
 import Link from "next/link"
 import Image from "next/image"
 import { countPokemon } from "../services/pokemon"
+import { motion } from "framer-motion"
 
 export default function Pokemon({pokemon}) { 
     console.log(pokemon)
     return (
         <main>
             <div className="controls">
-                {pokemon.pokemon.id !== 1 && <div className="previus"><Link href={`/pokemon/${pokemon.pokemon.id - 1}`}><a>Previus</a></Link></div>}
-                {pokemon.pokemon.id !== countPokemon && <div className="next"><Link href={`/pokemon/${pokemon.pokemon.id + 1}`}><a>Next</a></Link></div>}
+                <div className={`previus ${pokemon.pokemon.id === 1?"hide":""}`}><Link href={`/pokemon/${pokemon.pokemon.id - 1}`}><a>Previus</a></Link></div>
+                <div className={`next ${pokemon.pokemon.id === countPokemon?"hide":""}`}><Link href={`/pokemon/${pokemon.pokemon.id + 1}`}><a>Next</a></Link></div>
             </div>
             <h2>#{pokemon.pokemon.id} {pokemon.pokemon.name}</h2>
             <div className="content">
                 <div className="pokemon">
-                    <Image src={pokemon.pokemon.sprites.other.dream_world.front_default} width={300} height={300} alt="pokemon random" />
-                    <aside>
-                        <p>{pokemon.specie.flavor_text_entries[1].flavor_text}</p>
-                        <div className="caracteristics">
-                            <div className="block">
-                                <p>Height</p>
-                                <span>{pokemon.pokemon.height}</span>
+                    <motion.div key={"Image"} initial={{opacity:0,x:-200}} animate={{opacity:1,x:0,transition:{duration:1,delay:0.5}}}>
+                        <Image src={pokemon.pokemon.sprites.other.dream_world.front_default} width={300} height={300} alt="pokemon random" />    
+                    </motion.div>
+                    <motion.div initial={{opacity:0,y:200}} animate={{opacity:1,y:0,transition:{duration:1,delay:0.5}}}>
+                        <aside>
+                            <p>{pokemon.specie.flavor_text_entries[1].flavor_text}</p>
+                            <div className="caracteristics">
+                                <div className="block">
+                                    <p>Height</p>
+                                    <span>{pokemon.pokemon.height}</span>
+                                </div>
+                                <div className="block">
+                                    <p>Weight</p>
+                                    <span>{pokemon.pokemon.weight}</span>
+                                </div>
+                                <div className="block">
+                                    <p>Shape</p>
+                                    <span>{pokemon.specie.shape.name}</span>
+                                </div>
+                                <div className="block">
+                                    <p>Habitad</p>
+                                    <span>{pokemon.specie.habitat.name}</span>
+                                </div>
+                                <div className="block">
+                                    <p>Ability</p>
+                                    <span>{pokemon.pokemon.abilities[0].ability.name}</span>
+                                </div>
                             </div>
-                            <div className="block">
-                                <p>Weight</p>
-                                <span>{pokemon.pokemon.weight}</span>
-                            </div>
-                            <div className="block">
-                                <p>Shape</p>
-                                <span>{pokemon.specie.shape.name}</span>
-                            </div>
-                            <div className="block">
-                                <p>Habitad</p>
-                                <span>{pokemon.specie.habitat.name}</span>
-                            </div>
-                            <div className="block">
-                                <p>Ability</p>
-                                <span>{pokemon.pokemon.abilities[0].ability.name}</span>
-                            </div>
-                        </div>
-                        <h4>Type</h4>
-                        <div className="type">
-                        {
-                            pokemon.pokemon.types.map((type,id) => <div key={id,type.type.name} className="block">{type.type.name}</div>)
-                        }
-                        </div>
-                        <h4>Moves</h4>
-                        <div className="weaknesses">
+                            <h4>Type</h4>
+                            <div className="type">
                             {
-                                pokemon.pokemon.moves.map((moves,id) => <div key={id} className="block">{moves.move.name}</div>)
+                                pokemon.pokemon.types.map((type,id) => <div key={id,type.type.name} className="block">{type.type.name}</div>)
                             }
-                        </div>
-                    </aside>
+                            </div>
+                            <h4>Moves</h4>
+                            <div className="weaknesses">
+                                {
+                                    pokemon.pokemon.moves.map((moves,id) => <div key={id} className="block">{moves.move.name}</div>)
+                                }
+                            </div>
+                        </aside>
+                    </motion.div>
+                    
                     
                 </div>
                 
                 <div className="evolution">
-                    <h4>Evolutions</h4>
+                    <h3>Evolutions</h3>
                     <div className="list">
                         {
                             pokemon.evolutions2.map((pokemon,id) => {
@@ -69,6 +75,10 @@ export default function Pokemon({pokemon}) {
             <style jsx>{`
                 h2{
                     margin:0;   
+                }
+                h3{
+                    background:var(--BackgroundCar_dark);
+                    padding:1rem
                 }
                 main{
                     text-align:center;
@@ -101,6 +111,9 @@ export default function Pokemon({pokemon}) {
                 .controls .next{
                     flex:1 1 auto;
                     text-align:center;
+                }
+                .controls .hide{
+                    visibility:hidden;
                 }
                 .content{
                     text-align:start;

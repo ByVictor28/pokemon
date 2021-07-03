@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import {getAllPokemonDetails} from "../../services/pokemon"
 import Layout from '../../Components/Layout'
 import Pokemon from '../../Components/Pokemon'
+import { motion } from 'framer-motion'
 
 export default function PokemonD({pokemon}) { 
     const router = useRouter()
@@ -9,9 +10,9 @@ export default function PokemonD({pokemon}) {
 
     return (
         <Layout>
-            <main>
+            <motion.div key={`Pokemon_${idpokemon}`} exit={{opacity:0}} initial={{opacity:0}} animate={{opacity:1,transition:{duration:1}}}>
                 <Pokemon pokemon={pokemon}/>
-            </main>
+            </motion.div>
         </Layout>
     ) 
 }

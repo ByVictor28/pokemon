@@ -1,14 +1,15 @@
-import Card from '../../Components/Card'
-import Layout from '../../Components/Layout'
-import { getPokemonList } from '../../services/pokemon'
+import Card from '../Components/Card'
+import Layout from '../Components/Layout'
+import { getPokemonList } from '../services/pokemon'
 import Link from 'next/dist/client/link'
+import { motion } from 'framer-motion'
 export default function Home({listPokemons}) {
   // console.log(listPokemons)
   return (
     <Layout>
-      <main>
+      <motion.div className="prinsipal" exit={{opacity:0}} >
         <div className="pagination">
-          <div className="page active"><Link href={`/pokemons/`}><a>1</a></Link></div>
+          <div className="page active"><Link href={`/`}><a>1</a></Link></div>
           <div className="page"><Link href={`/pokemons/${2}`}><a>2</a></Link></div>
           <div className="page"><Link href={`/pokemons/${3}`}><a>3</a></Link></div>
           <div className="page"><Link href={`/pokemons/${4}`}><a>4</a></Link></div>
@@ -34,15 +35,15 @@ export default function Home({listPokemons}) {
             listPokemons.map((pokemon,id) => <Card pokemon={pokemon} key={`${id}_${pokemon.name}`}/>)
           }
         </div>
-      </main>
+      </motion.div>
       <style jsx>{`
-        main{
+        .prinsipal{
           display:flex;
           flex-direction:column;
           justify-content:center;
           align-items:center;
         }
-        main .list{
+        .list{
           display:flex;
           flex-wrap:wrap;
           gap:2rem;

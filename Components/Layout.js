@@ -3,7 +3,7 @@ export default function Layout({children}) {
     return(
         <>   
             <Header></Header>
-            {children}
+            <main>{children}</main>
             <div>Footer</div>
         </>
     )
