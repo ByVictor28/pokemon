@@ -1,6 +1,6 @@
 import Layout from "../../Components/Layout";
 import Pokemon from "../../Components/Pokemon";
-import {getAllPokemonDetails} from "../../services/pokemon"
+import {getAllPokemonDetails, pagesTotal} from "../../services/pokemon"
 import { motion } from "framer-motion";
 export default function RandomPokemon({pokemon}) {
     return (
@@ -13,7 +13,7 @@ export default function RandomPokemon({pokemon}) {
 }
 
 export async function getServerSideProps() {
-    const random = Math.round(Math.random() * (376 - 1) + 1);
+    const random = Math.round(Math.random() * (pagesTotal - 1) + 1);
     // console.log(random)
     const pokemonDetails = await getAllPokemonDetails(random)
     return {

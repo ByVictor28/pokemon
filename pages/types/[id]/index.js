@@ -8,7 +8,7 @@ export default function Type({}) {
     const router = useRouter()
     return (
         <Layout>
-sdas
+
         </Layout>    
     ) 
 }

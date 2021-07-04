@@ -1,4 +1,71 @@
-export const countPokemon = 376;
+export const countPokemon = 898;
+export const pagesTotal = Math.ceil(countPokemon/20) 
+
+export function PaginationUrls(pageSelected) {
+    const listUrl = []
+    const pageSelectedInt = parseInt(pageSelected)
+    if (pageSelectedInt !== 0) {
+        listUrl.push({
+            url:`/pokemons/${pageSelectedInt-1}`,
+            number:"previus"
+        })
+    }
+    if (pageSelectedInt <= 5) {
+        for (let index = 0; index <= 8; index++) {
+            if (index===0) {
+                listUrl.push({
+                  url:`/`,
+                  number:index
+                })
+            }else{
+                listUrl.push({
+                    url:`/pokemons/${index}`,
+                    number:index
+                })
+            }
+            if (index===8) {
+                listUrl.push({
+                    url:`/pokemons/${pageSelectedInt+10}`,
+                    number:pageSelectedInt+10
+                })
+            }
+        }
+    }else if (pageSelectedInt>=(pagesTotal-4)) {
+        for (let index = (pagesTotal-8); index < pagesTotal; index++) {
+            listUrl.push({
+                url:`/pokemons/${index}`,
+                number:index
+            })
+        }
+        
+    }else{
+        if ((pageSelectedInt - 10)> 1) {
+            listUrl.push({
+                url:`/pokemons/${pageSelectedInt-10}`,
+                number:pageSelectedInt-10
+            })
+        }
+        for (let index =pageSelectedInt-3; index <=pageSelectedInt+3; index++) {
+            listUrl.push({
+                url:`/pokemons/${index}`,
+                number:index
+              })
+        }
+        if ((pageSelectedInt + 10)<pagesTotal) {
+            listUrl.push({
+                url:`/pokemons/${pageSelectedInt+10}`,
+                number:pageSelectedInt+10
+            })
+        }
+    }
+    if (pageSelectedInt !== (pagesTotal-1)) {
+        listUrl.push({
+            url:`/pokemons/${pageSelectedInt+1}`,
+            number:"next"
+        })
+    }
+    return listUrl
+}
 
 export async function getPokemonList(page) {
     const listPokemons =await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${20*page}`)
