@@ -29,8 +29,7 @@ export default function Header({children}) {
                         <input type="text" placeholder="Name or id" id="search" value={searchValue} onChange={(e)=>setSearchValue(e.target.value)} onKeyPress={(e) => enterHandler(e)} />
                         <button onClick={searchHandler}><FontAwesomeIcon icon={faSearch}/></button>
                     </div>
-                    <li><Link href="/type"><a>types</a></Link></li>
-                    <li><Link href="/berries"><a>Berries</a></Link></li>
+                    <li><Link href="/types"><a>types</a></Link></li>
                 </div>
             </ul>
             <style jsx>{`

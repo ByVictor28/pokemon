@@ -5,7 +5,6 @@ import { countPokemon } from "../services/pokemon"
 import { motion } from "framer-motion"
 
 export default function Pokemon({pokemon}) { 
-    console.log(pokemon)
     return (
         <main>
             <div className="controls">

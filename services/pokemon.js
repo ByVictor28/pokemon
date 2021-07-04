@@ -15,6 +15,53 @@ export async function getPokemonList(page) {
     return listPokemonsDetails
 }
 
+export async function getTypesList(page) {
+    const listTypes =await fetch(`https://pokeapi.co/api/v2/type`)
+    const listTypesJSON =await listTypes.json()
+    
+    
+    return listTypesJSON.results
+}
+
+
+export async function getPokemonListByType(id,page) {
+    const listPokemons =await fetch(`https://pokeapi.co/api/v2/type/${id}`)
+    const listPokemonsJSON =await listPokemons.json()
+    const results = []
+    let pokemonsByType = {}
+
+    const start = page===1?0:(20*(page-1)+1)
+    const end = 20*page
+    console.log(page,start,end)
+
+    listPokemonsJSON.pokemon.some((pokemon,index) => {
+        
+        if (index > start) {
+            results.push(pokemon)
+        }
+        if (index > end) {
+            return true
+        }
+    });
+    const listPokemonsDetails = await Promise.all(
+        results.map( async pokemon => {
+        const pokemonDetail = await fetch(pokemon.pokemon.url)
+        const pokemonDetailJSON = await pokemonDetail.json()
+        return pokemonDetailJSON
+        })
+    )
+    pokemonsByType.pokemons = listPokemonsDetails
+    pokemonsByType.allPokemons = listPokemonsJSON.pokemon
+    pokemonsByType.name = listPokemonsJSON.name
+    pokemonsByType.pages = []
+    const pagesLength = Math.ceil(listPokemonsJSON.pokemon.length/20)
+    for (let index = 0; index < pagesLength; index++) {
+        pokemonsByType.pages.push(`/types/${id}/page/${index+1}`)
+    }
+    
+    return pokemonsByType
+}
+
 export async function getAllPokemonDetails(id) {
     let pokemonDetails = {}
     const random = Math.round(Math.random() * (898 - 1) + 1);
