@@ -3,9 +3,12 @@ import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faRandom,faSearch} from "@fortawesome/free-solid-svg-icons"
 import { useRouter } from 'next/router'
+import Switch from "./Switch"
+
 export default function Header({children}) { 
     const router = useRouter()
     const [searchValue, setSearchValue] = useState("")
+    const [blackTheme, setBlackTheme] = useState(true)
 
     const searchHandler = () =>{
         router.push(`/pokemon/${searchValue}`)
@@ -30,11 +33,12 @@ export default function Header({children}) {
                         <button onClick={searchHandler}><FontAwesomeIcon icon={faSearch}/></button>
                     </div>
                     <li><Link href="/types"><a>types</a></Link></li>
+                    <Switch changeColor={setBlackTheme}/>
                 </div>
             </ul>
             <style jsx>{`
                 .navigation{
-                    padding:0 2rem; 
+                    padding:1rem 2rem; 
                 }
                 .navigation ul{
                     padding:0;
@@ -84,8 +88,11 @@ export default function Header({children}) {
             `}</style>
             <style jsx global>{`
                 :root{
-                    --main-color:#E1EAEC;
-                    --main-text:#040404;
+                    --Background_dark: ${blackTheme?"hsl(230, 17%, 14%)":"hsl(0, 0%, 100%)"} ;
+                    --BackgroundTop_dark: ${blackTheme?"hsl(232, 19%, 15%)":"hsl(225, 100%, 98%)"} ;
+                    --BackgroundCar_dark: ${blackTheme?"hsl(228, 28%, 20%)":"hsl(227, 47%, 96%)"} ;
+                    --TextSub_dark: ${blackTheme?"hsl(228, 34%, 66%)":"hsl(228, 12%, 44%)"} ;
+                    --Text_dark: ${blackTheme?"hsl(0, 0%, 100%)":"hsl(230, 17%, 14%)"} ;
                 }
                 body{
                     background:var(--Background_dark);

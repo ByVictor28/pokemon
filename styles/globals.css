@@ -1,5 +1,5 @@
 :root{
-  --Background_dark: hsl(230, 17%, 14%);
+  /* --Background_dark: hsl(230, 17%, 14%);
   --BackgroundTop_dark: hsl(232, 19%, 15%);
   --BackgroundCar_dark: hsl(228, 28%, 20%);
   --TextSub_dark: hsl(228, 34%, 66%);
@@ -9,7 +9,7 @@
   --BackgroundTop_white: hsl(225, 100%, 98%);
   --BackgroundCar_white: hsl(227, 47%, 96%);
   --TextSub_white: hsl(228, 12%, 44%);
-  --Text_white: hsl(230, 17%, 14%);
+  --Text_white: hsl(230, 17%, 14%); */
 
   --Lime_Green: hsl(163, 72%, 41%);
   --Bright_Red:hsl(356, 69%, 56%);

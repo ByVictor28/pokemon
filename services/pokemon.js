@@ -153,10 +153,14 @@ export async function getAllPokemonDetails(id) {
     let evolutions = []
     
     evolutions.push(pokemonEvolutionsJSON.chain.species)
-    evolutions.push(pokemonEvolutionsJSON.chain.evolves_to[0].species)
     // console.log(pokemonEvolutionsJSON.chain.evolves_to[0].evolves_to[0])
-    if (pokemonEvolutionsJSON.chain.evolves_to[0].evolves_to[0] !== undefined){
-        evolutions.push(pokemonEvolutionsJSON.chain.evolves_to[0].evolves_to[0].species)
+
+    if (pokemonEvolutionsJSON.chain.evolves_to[0] !== undefined){
+        evolutions.push(pokemonEvolutionsJSON.chain.evolves_to[0].species)
+        
+        if (pokemonEvolutionsJSON.chain.evolves_to[0].evolves_to[0] !== undefined){
+            evolutions.push(pokemonEvolutionsJSON.chain.evolves_to[0].evolves_to[0].species)
+        }
     }
     const pokemonEvolutionsChain = await Promise.all(
         evolutions.map( async (pokemon) => {
