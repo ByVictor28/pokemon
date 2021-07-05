@@ -15,7 +15,7 @@ export default function Pokemon({pokemon}) {
             <div className="content">
                 <div className="pokemon">
                     <motion.div key={"Image"} initial={{opacity:0,x:-200}} animate={{opacity:1,x:0,transition:{duration:1,delay:0.5}}}>
-                        <Image src={pokemon.pokemon.sprites.other.dream_world.front_default} width={300} height={300} alt="pokemon random" />    
+                        <img src={pokemon.pokemon.sprites.other.dream_world.front_default} width={300} height={300} alt="pokemon random" />    
                     </motion.div>
                     <motion.div initial={{opacity:0,y:200}} animate={{opacity:1,y:0,transition:{duration:1,delay:0.5}}}>
                         <aside>

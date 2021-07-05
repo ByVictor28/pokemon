@@ -2,7 +2,6 @@ import { faHeart, faFistRaised, faShieldAlt, faRunning, faStar} from '@fortaweso
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from 'next/link';
 // import {} from "/../public/images/not_found.png"
-import Image from "next/image"
 export default function Card({pokemon}) {
     if (pokemon.sprites.front_default===null) {
         pokemon.sprites.front_default = "/images/not_found.png"
@@ -14,13 +13,13 @@ export default function Card({pokemon}) {
                 <div className="card">
                     <div className="image">
                         <div className="image_front">
-                            <Image src={pokemon.sprites.front_default} alt="pokemon front" width={100} height={100} layout="responsive" />
+                            <img src={pokemon.sprites.front_default} alt="pokemon front" width={100} height={100} layout="responsive" />
                         </div>
                         <div className="image_center">
-                            <Image src={pokemon.sprites.other.dream_world.front_default!==null?pokemon.sprites.other.dream_world.front_default:pokemon.sprites.front_default} alt="pokemon main" width={100} height={100} layout="responsive" />
+                            <img src={pokemon.sprites.other.dream_world.front_default!==null?pokemon.sprites.other.dream_world.front_default:pokemon.sprites.front_default} alt="pokemon main" width={100} height={100} layout="responsive" />
                         </div>
                         <div className="image_back">
-                            <Image src={pokemon.sprites.back_default!==null?pokemon.sprites.back_default:pokemon.sprites.front_default} alt="pokemon back" width={100} height={100} layout="responsive" />
+                            <img src={pokemon.sprites.back_default!==null?pokemon.sprites.back_default:pokemon.sprites.front_default} alt="pokemon back" width={100} height={100} layout="responsive" />
                         </div>
                     </div>
                     <div className="content">
