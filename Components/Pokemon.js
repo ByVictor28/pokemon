@@ -15,7 +15,7 @@ export default function Pokemon({pokemon}) {
             <div className="content">
                 <div className="pokemon">
                     <motion.div key={"Image"} initial={{opacity:0,x:-200}} animate={{opacity:1,x:0,transition:{duration:1,delay:0.5}}}>
-                        <img src={pokemon.pokemon.sprites.other.dream_world.front_default} width={300} height={300} alt="pokemon random" />    
+                        <img src={pokemon.pokemon.sprites.other.dream_world.front_default} alt="pokemon random" />    
                     </motion.div>
                     <motion.div initial={{opacity:0,y:200}} animate={{opacity:1,y:0,transition:{duration:1,delay:0.5}}}>
                         <aside>
@@ -123,11 +123,16 @@ export default function Pokemon({pokemon}) {
                     flex-wrap:wrap;
                 }
                 .pokemon img{
-                    width:35rem;
-                    height:35rem;
+                    width:30rem;
+                    height:30rem;
                     flex:0 1 auto;
                 }
-
+                aside {
+                    display:flex;
+                    flex-direction:column;
+                    align-items:center;
+                    justify-content:center;
+                }
                 aside .caracteristics{
                     background:var(--BackgroundCar_dark);
                     display:flex;

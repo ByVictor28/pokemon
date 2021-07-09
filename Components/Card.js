@@ -13,13 +13,13 @@ export default function Card({pokemon}) {
                 <div className="card">
                     <div className="image">
                         <div className="image_front">
-                            <img src={pokemon.sprites.front_default} alt="pokemon front" width={100} height={100} layout="responsive" />
+                            <img src={pokemon.sprites.front_default} alt="pokemon front" />
                         </div>
                         <div className="image_center">
-                            <img src={pokemon.sprites.other.dream_world.front_default!==null?pokemon.sprites.other.dream_world.front_default:pokemon.sprites.front_default} alt="pokemon main" width={100} height={100} layout="responsive" />
+                            <img src={pokemon.sprites.other.dream_world.front_default!==null?pokemon.sprites.other.dream_world.front_default:pokemon.sprites.front_default} alt="pokemon main" />
                         </div>
                         <div className="image_back">
-                            <img src={pokemon.sprites.back_default!==null?pokemon.sprites.back_default:pokemon.sprites.front_default} alt="pokemon back" width={100} height={100} layout="responsive" />
+                            <img src={pokemon.sprites.back_default!==null?pokemon.sprites.back_default:pokemon.sprites.front_default} alt="pokemon back" />
                         </div>
                     </div>
                     <div className="content">
@@ -68,14 +68,16 @@ export default function Card({pokemon}) {
                 </div>
             </Link>
             <style jsx>{`
-            
+                img{
+                    width:100%;
+                    margin:0 auto;
+                }
                 h3,h4{
                     margin:0;
                 }
                 .container{
                     background:var(--BackgroundCar_dark);
                     width:25rem;
-                    height:40rem;
                     border-radius:1rem;
                     text-align:center;
                     padding:1rem;
@@ -104,17 +106,22 @@ export default function Card({pokemon}) {
                 .container .card .image{
                     // background:blue;
                     width:100%;
+                    height:20rem;
                     display:flex;
                     justify-content:center;
                     align-items:center;
-                    margin-bottom:1rem;
+                    transition: all 1s ease;
                 }
                 .container .card .image div{
                     // background:red;
                 }
                 .container .card .image .image_center{
                     width: 80%;
+                    height:100%;
                     transition: all 1s ease;
+                }
+                .container .card .image .image_center img{
+                    height:100%;
                 }
                 .container .card .image .image_front{
                     visibility:hidden;
@@ -155,7 +162,7 @@ export default function Card({pokemon}) {
 
                 //TRANSITIONS
                 .container:hover > .card .image{
-                    // width:60%;
+                    height:15rem;
                 }
                 .container:hover > .card .content .types{
                     visibility:visible;
@@ -166,17 +173,17 @@ export default function Card({pokemon}) {
                     opacity: 1;
                 }
                 .container:hover > .card .image .image_center{
-                    width: 50%;
+                    // width: 50%;
                 }
                 .container:hover > .card .image .image_back{
                     visibility:visible;
                     opacity: 1;
-                    width:30%
+                    width:50%;
                 }
                 .container:hover > .card .image .image_front{
                     visibility:visible;
                     opacity: 1;
-                    width:30%
+                    width:50%;
                 }
                 .container:hover > .circle {
                     width:30rem;
